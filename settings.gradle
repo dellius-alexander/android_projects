@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "android_projects"
-include ':app'
+//include ':app'
 include ':helloworld'

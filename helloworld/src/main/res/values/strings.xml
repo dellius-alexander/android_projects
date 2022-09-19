@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Hello World</string>
+    <string name="submit">Submit</string>
+    <string name="email_address">Email Address</string>
 </resources>

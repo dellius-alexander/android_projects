@@ -6,13 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".HelloActivity">
 
-    <TextView
+    <EditText
+        android:id="@+id/get_email_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:fontFamily="@font/gothic_a1_extrabold"
+        android:hint="@string/email_address"
+        android:inputType="textEmailAddress"
+        android:minWidth="48dp"
+        android:text=""
+        android:textColorHint="#78909C"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/submit_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213"
+        android:autofillHints="@string/email_address" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:hint="@string/submit"
+        android:minWidth="48dp"
+        android:text="@string/submit"
+        android:textColorHint="#78909C"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/get_email_address"
+        tools:importantForAutoFill="no"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
