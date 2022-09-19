@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Currency Converter</string>
+    <string name="to">TO</string>
+    <string name="home">Home</string>
+    <string name="market_status">Market Status</string>
+    <string name="help">Help</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="convert">CONVERT</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="tocurrency">ToCurrency</string>
+    <string name="fromcurrency">FromCurrency</string>
+    <string name="result">Result</string>
+    <string name="la_currency">LA Currency</string>
+    <string name="todo">TODO</string>
+    <string name="welcome_to_la_currency">Welcome to Loony App</string>
+    <string name="base">Base Currency</string>
+    <string name="e_mail">E-mail</string>
+    <string name="question_currencies_tracked">Question: How many currencies does this app track?
+    </string>
+    <string name="question_base_currency">Question : What is the base currency used in this
+        app?
+    </string>
+    <string name="password">Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="user_ID">User ID</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">LOGIN</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="submit">Submit</string>
+    <string name="log_out">Log Out</string>
+
+</resources>
