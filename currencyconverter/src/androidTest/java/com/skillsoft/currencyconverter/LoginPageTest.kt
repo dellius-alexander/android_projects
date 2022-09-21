@@ -48,7 +48,6 @@ class LoginPageTest {
         mActivityTestRule = ActivityScenarioRule(LoginPage::class.java)
     }
 
-
     @Test
     @Throws(Exception::class)
     fun loginTest()
