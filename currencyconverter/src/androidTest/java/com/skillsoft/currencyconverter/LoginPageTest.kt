@@ -29,19 +29,18 @@ class LoginPageTest {
 
     /**
      * ActivityScenarioRule: is great because it handles the setup and teardown of our
-     * activity automatically.
+     * activity automatically.  ActivityScenarioRule launches a given activity before the
+     * test starts and closes after the test.
      * Note: you must initialize the androidx.test.core.app.ActivityScenario.launch
      * function before running tests.
      */
     @get:Rule
     private lateinit var mActivityTestRule: ActivityScenarioRule<LoginPage>
 
-
     @Before
     @Throws(Exception::class)
     fun setup()
     {
-
         // @JvmField: Instructs the Kotlin compiler not to generate
         //      getters/setters for this property and expose it as a field.
         @JvmField
@@ -56,16 +55,21 @@ class LoginPageTest {
         // initializes the LoginPage activity
         // creates a view interaction for the given view userID using the withId() function
         // also enables us to interact with the view, like entering a value to be typed
-        val viewUserId = onView(withId(R.id.userID)).perform(typeText("bob.baker@loonycorn.com"))
+        val viewUserId = onView(withId(R.id.userID))
+            .perform(typeText("bob.baker@loonycorn.com"))
         assertNotNull(viewUserId)
         // creates a view interaction for the given view password using the withId() function
         // also enables us to interact with the view, like entering a value to be typed
         // we also closed the keyboard after entering password
-        val viewPwd = onView(withId(R.id.password)).perform(typeText("bobbaker"), closeSoftKeyboard())
+        val viewPwd = onView(withId(R.id.password))
+            .perform(typeText("bobbaker"), closeSoftKeyboard())
         assertNotNull(viewPwd)
         // creates a view interaction for the given view login_button using the withId() function
         // here we check if the button is clickable and we click the login button
-        onView(withId(R.id.login_button)).check(matches(isClickable())).perform(click())
-
+        onView(withId(R.id.login_button))
+            .check(matches(isClickable()))
+            .perform(click())
+        Thread.sleep(2000L)
     }
+
 }
