@@ -42,6 +42,7 @@ jobs:
         ANDROID_ENV: development
       ports:
         - 80
+        - 5554
       #      volumes:
       #        - my_docker_volume:/volume_mount
       options: --user root
@@ -54,7 +55,7 @@ jobs:
       - run: ./gradlew lint test
       - run: ./gradlew test
 
-      - name: run tests
+      - name: Run instrumented tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
