@@ -47,9 +47,9 @@ jobs:
       options: --user root
     steps:
       - name: Checkout Repo
-#      - uses: actions/checkout@v2    
+      - uses: actions/checkout@v2    
         run: |
           pwd
-          ls -liaR /github
-#          ./gradlew androidDependencies
-#          ./gradlew lint test
+          ls -liaR 
+          ./gradlew androidDependencies
+          ./gradlew lint test
