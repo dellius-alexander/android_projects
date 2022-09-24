@@ -62,7 +62,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-${{ ANDROID_API_LEVEL }}
+          key: avd-${{ env.ANDROID_API_LEVEL }}
 
       - run: mkdir -p /github/home/.android/avd/test.avd/
       - run: ls -liaR
