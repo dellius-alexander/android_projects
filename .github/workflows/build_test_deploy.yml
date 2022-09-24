@@ -51,6 +51,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - run: mkdir -p /github/home/.android/avd/test.avd/
+
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
       - name: AVD cache
@@ -62,7 +64,7 @@ jobs:
             ~/.android/adb*
           key: avd-${{ env.ANDROID_API_LEVEL }}
 
-      - run: mkdir -p /github/home/.android/avd/test.avd/
+
       - run: ls -liaR
       - run: gradle wrapper
       - run: ./gradlew androidDependencies
