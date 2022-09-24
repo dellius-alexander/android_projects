@@ -94,9 +94,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: dalexander2israel/android:2022.09.2
-#      ports:
-#        - 80:80
-#        - 5554:5554
+      ports:
+        - 80
+        - 5554
       #      volumes:
       #        - my_docker_volume:/volume_mount
       options: --user root
