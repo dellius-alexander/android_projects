@@ -37,7 +37,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: dalexander2israel/android:2021.08.1
+      image: dalexander2israel/android:2022.09.2
       env:
         ANDROID_ENV: development
       ports:
