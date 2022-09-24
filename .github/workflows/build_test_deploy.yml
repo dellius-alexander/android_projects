@@ -54,6 +54,7 @@ jobs:
       - run: ./gradlew androidDependencies
       - run: ./gradlew lint test
       - run: ./gradlew test
+      - run: mkdir -p /github/home/.android/avd/test.avd/
 
       - name: Run instrumented tests
         uses: reactivecircus/android-emulator-runner@v2
