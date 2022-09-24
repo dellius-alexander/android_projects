@@ -37,7 +37,7 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 jobs:
-  build:
+  build-units:
     runs-on: ubuntu-latest
     container:
       image: dalexander2israel/android:2022.09.2
@@ -68,10 +68,15 @@ jobs:
         run: ls -liaR
 
       - name: Download Gradle version
-      - run: gradle wrapper
-      - run: ./gradlew androidDependencies
-      - run: ./gradlew lint test
-      - run: ./gradlew test
+        run: gradle wrapper
+
+      - name: Download androidDependencies
+        run: ./gradlew androidDependencies
+
+      - name: Lint Test
+        run: ./gradlew lint test
+      - name: Unit Tests
+        run: ./gradlew test
 
 #      - name: create AVD and generate snapshot for caching
 #        if: steps.avd-cache.outputs.cache-hit != 'true'
@@ -83,6 +88,47 @@ jobs:
 #          disable-animations: false
 #          script: echo "Generated AVD snapshot for caching."
 
+
+
+  build-instrumented:
+    runs-on: ubuntu-latest
+    container:
+      image: dalexander2israel/android:2022.09.2
+      ports:
+        - 80:80
+        - 5554:5554
+      #      volumes:
+      #        - my_docker_volume:/volume_mount
+      options: --user root
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - run: mkdir -p /github/home/.android/avd/test.avd/
+
+      - name: Gradle cache
+        uses: gradle/gradle-build-action@v2
+      - name: AVD cache
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ env.ANDROID_API_LEVEL }}
+
+      - name: List Directory
+        run: ls -liaR
+
+      - name: Download Gradle version
+        run: gradle wrapper
+
+      - name: Download androidDependencies
+        run: ./gradlew androidDependencies
+
+      - name: Lint Test
+        run: ./gradlew lint test
+
       - name: Run instrumented tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -92,4 +138,3 @@ jobs:
           profile: Pixel XL
           script: |
             ./gradlew connectedAndroidTest
-
