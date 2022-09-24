@@ -43,10 +43,10 @@ jobs:
         ANDROID_API_LEVEL: 33
       ports:
         - 80
-#        - 5554
+        - 5554
       #      volumes:
       #        - my_docker_volume:/volume_mount
-      options: |
+      options:
         --user root
         --cpu 2
     steps:
