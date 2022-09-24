@@ -40,7 +40,7 @@ jobs:
       image: dalexander2israel/android:2022.09.2
       env:
         ANDROID_ENV: development
-        ANDROID_API_LEVEL: 33
+        ANDROID_API_LEVEL: 30
       ports:
         - 80
         - 5554
