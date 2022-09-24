@@ -46,9 +46,7 @@ jobs:
         - 5554
       #      volumes:
       #        - my_docker_volume:/volume_mount
-      options:
-        --user root
-        --cpu 2
+      options: --user root
     steps:
       - name: Checkout
         uses: actions/checkout@v3
