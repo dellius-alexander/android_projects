@@ -5,7 +5,7 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 33
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = findProperty('kotlin.version')
     defaultConfig {
         applicationId "com.skillsoft.currencyconverter"
         minSdk 29
