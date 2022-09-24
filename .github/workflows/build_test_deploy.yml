@@ -54,5 +54,7 @@ jobs:
           
       - name: INIT Setup Environment
         run: |
-          ./gradlew androidDependencies
-          ./gradlew lint test
+          ls -liaR
+        
+#          ./gradlew androidDependencies
+#          ./gradlew lint test
