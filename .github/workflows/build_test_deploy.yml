@@ -48,5 +48,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: ls -liaR 
+      - run: gradle wrapper
       - run: ./gradlew androidDependencies
       - run: ./gradlew lint test
