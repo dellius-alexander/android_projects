@@ -48,6 +48,6 @@ jobs:
     steps:
       - name: Checkout Repo
 #      - uses: actions/checkout@v2    
-      - run: ls -liaR
+        run: ls -liaR
 #          ./gradlew androidDependencies
 #          ./gradlew lint test
