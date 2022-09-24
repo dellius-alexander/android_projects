@@ -40,26 +40,48 @@ jobs:
       image: dalexander2israel/android:2022.09.2
       env:
         ANDROID_ENV: development
+        ANDROID_API_LEVEL: 33
       ports:
         - 80
-        - 5554
+#        - 5554
       #      volumes:
       #        - my_docker_volume:/volume_mount
-      options: --user root
+      options: |
+        --user root
+        --cpu 2
     steps:
-      - name: Checkout android projects
+      - name: Checkout
         uses: actions/checkout@v3
-      - run: ls -liaR
-      - run: gradle wrapper
-      - run: ./gradlew androidDependencies
-      - run: ./gradlew lint test
-      - run: ./gradlew test
-      - run: mkdir -p /github/home/.android/avd/test.avd/
+
+      - name: Gradle cache
+        uses: gradle/gradle-build-action@v2
+
+      - name: AVD cache
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ ANDROID_API_LEVEL }}
+        - run: mkdir -p /github/home/.android/avd/test.avd/
+      - name: create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
 
       - name: Run instrumented tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 29
+          api-level: 30
+          arch: x86
+          target: 33
+          profile: Pixel XL
           script: |
             ./gradlew connectedAndroidTest
 
