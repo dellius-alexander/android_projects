@@ -47,8 +47,6 @@ jobs:
       options: --user root
     steps:
       - uses: actions/checkout@v3
-        run: |
-          pwd
-          ls -liaR 
-          ./gradlew androidDependencies
-          ./gradlew lint test
+      - run: ls -liaR 
+      - run: ./gradlew androidDependencies
+      - run: ./gradlew lint test
