@@ -46,8 +46,8 @@ jobs:
 #        - my_docker_volume:/volume_mount
       options: --cpus 1
     steps:
-      - checkout    
+      - name: Checkout Repo
+      - uses: actions/checkout@v2    
       - run: ls -liaR
-        
 #          ./gradlew androidDependencies
 #          ./gradlew lint test
