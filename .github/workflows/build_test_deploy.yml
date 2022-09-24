@@ -9,7 +9,7 @@
 name: 'Build, Test Android App'
 env:
   ANDROID_ENV: development
-  ANDROID_API_LEVEL: 30
+  ANDROID_API_LEVEL: 33
 on:
   push:
     branches:
@@ -83,9 +83,9 @@ jobs:
       - name: Run instrumented tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 30
+          api-level: ${{ env.ANDROID_API_LEVEL }}
           arch: x86
-          target: 33
+          target: ${{ env.ANDROID_API_LEVEL }}
           profile: Pixel XL
           script: |
             ./gradlew connectedAndroidTest
