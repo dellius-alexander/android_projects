@@ -46,11 +46,18 @@ jobs:
       #        - my_docker_volume:/volume_mount
       options: --user root
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout android projects
+        uses: actions/checkout@v3
       - run: ls -liaR
       - run: gradle wrapper
       - run: ./gradlew androidDependencies
       - run: ./gradlew lint test
       - run: ./gradlew test
-      - run: ./gradlew connectedAndroidTest
+
+      - name: run tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: |
+            ./gradlew connectedAndroidTest
 
