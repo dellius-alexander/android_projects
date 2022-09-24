@@ -134,7 +134,7 @@ jobs:
         with:
           api-level: ${{ env.ANDROID_API_LEVEL }}
           arch: x86
-          target: ${{ env.ANDROID_API_LEVEL }}
+          target: 32
           profile: Pixel XL
           script: |
             ./gradlew connectedAndroidTest
