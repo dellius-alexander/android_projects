@@ -50,6 +50,6 @@ jobs:
 #      - uses: actions/checkout@v2    
         run: |
           pwd
-          ls -liaR /
+          ls -liaR /github
 #          ./gradlew androidDependencies
 #          ./gradlew lint test
