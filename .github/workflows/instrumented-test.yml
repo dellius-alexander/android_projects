@@ -37,13 +37,13 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 jobs:
-  build-units:
+  build-instrumented:
     runs-on: ubuntu-latest
     container:
       image: dalexander2israel/android:2022.09.2
-#      ports:
-#        - 80:80
-#        - 5554:5554
+      ports:
+        - 80
+        - 5554
       #      volumes:
       #        - my_docker_volume:/volume_mount
       options: --user root
@@ -63,7 +63,15 @@ jobs:
             ~/.android/avd/*
             ~/.android/adb*
           key: avd-${{ env.ANDROID_API_LEVEL }}
-
+      #      - name: create AVD and generate snapshot for caching
+      #        if: steps.avd-cache.outputs.cache-hit != 'true'
+      #        uses: reactivecircus/android-emulator-runner@v2
+      #        with:
+      #          api-level: ${{ env.ANDROID_API_LEVEL }}
+      #          force-avd-creation: false
+      #          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+      #          disable-animations: false
+      #          script: echo "Generated AVD snapshot for caching."
       - name: List Directory
         run: ls -liaR
 
@@ -75,10 +83,12 @@ jobs:
 
       - name: Lint Test
         run: ./gradlew lint test
-      - name: Unit Tests
-        run: ./gradlew test
 
-
-
-
-
+      - name: Run instrumented tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ env.ANDROID_API_LEVEL }}
+          arch: x86
+          profile: Pixel XL
+          script: |
+            ./gradlew connectedAndroidTest
