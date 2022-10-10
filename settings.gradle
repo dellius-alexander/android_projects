@@ -1,11 +1,13 @@
+// plugins will use these repository settings
 pluginManagement {
     repositories {
         gradlePluginPortal()
         google()
         mavenCentral()
-
+        maven { url "https://jitpack.io" }
     }
 }
+// dependencies will use these repository settings
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -14,7 +16,7 @@ dependencyResolutionManagement {
         maven { url "https://jitpack.io" }
     }
 }
+
 rootProject.name = "android_projects"
-//include ':app'
 include ':helloworld'
 include ':currencyconverter'

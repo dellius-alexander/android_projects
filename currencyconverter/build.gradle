@@ -60,9 +60,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'com.github.DonMat:searchablespinner:v1.0.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.10"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    runtimeOnly "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$kotlin_version"
 }
 
 task cleanCurrencyConverter(type: Delete) {
-    delete rootProject.buildDir
+    delete buildDir
 }

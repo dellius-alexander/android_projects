@@ -1,6 +1,9 @@
 package com.skillsoft.currencyconverter
 
+import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
@@ -28,8 +31,12 @@ open class NavigationPane: AppCompatActivity() {
         val emailId: TextView = headerView.findViewById(R.id.email_ID)
         val nameId: TextView = headerView.findViewById(R.id.name_ID)
 
-        val mAuth = FirebaseAuth.getInstance()
-        val userRef = FirebaseDatabase.getInstance().reference.child("Users")
+        val mAuth = FirebaseAuth
+                        .getInstance()
+        val userRef = FirebaseDatabase
+                        .getInstance()
+                        .reference
+                        .child("Users")
 
         userID =  mAuth.currentUser!!.email
         emailId.text = userID
@@ -40,8 +47,14 @@ open class NavigationPane: AppCompatActivity() {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                val firstName = p0.child(mAuth.currentUser!!.uid).child("firstName").value
-                val lastName = p0.child(mAuth.currentUser!!.uid).child("lastName").value
+                val firstName = p0
+                                    .child(mAuth.currentUser!!.uid)
+                                    .child("firstName")
+                                    .value
+                val lastName = p0
+                                    .child(mAuth.currentUser!!.uid)
+                                    .child("lastName")
+                                    .value
                 user_name = "$firstName $lastName"
                 nameId.text = user_name
             }
@@ -70,7 +83,8 @@ open class NavigationPane: AppCompatActivity() {
                     startActivity(helpIntent)
                 }
                 R.id.contact -> {
-                    Toast.makeText(this, "Visit: www.loonycorn.com", Toast.LENGTH_LONG).show()
+                    val url = "www.loonycorn.com"
+                    openUrl(url)
                 }
                 R.id.logout -> {
                     FirebaseAuth.getInstance().signOut()
@@ -87,5 +101,45 @@ open class NavigationPane: AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    /**
+     * Opens a URL in Chrome or default browser.
+     * @param url Uniform Resource Locator
+     */
+    @SuppressLint("QueryPermissionsNeeded")
+    private fun openUrl(url: String) {
+        val googleChromeNavigatePrefix = "googlechrome://navigate?url="
+        val newUrl: String?
+        try {
+            newUrl = if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                "http://$url"
+            } else {
+                url
+            }
+            try {
+                Toast.makeText(this, "Visit: $url", Toast.LENGTH_LONG).show()
+                val uri = Uri.parse(googleChromeNavigatePrefix + newUrl)
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.setPackage("com.android.chrome")
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException){
+                println(e.message)
+                println("Chrome is not installed. Or chrome not selected as default browser. Or no " +
+                        "Browser is selected as default browser.")
+                e.stackTrace
+                val uri = Uri.parse(newUrl)
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                intent.setPackage(null)
+                startActivity(intent)
+            }
+        } catch (e: ActivityNotFoundException){
+            println(e.message)
+            println("Chrome is not installed. Or chrome not selected as default browser. Or no " +
+                    "Browser is selected as default browser.")
+            e.stackTrace
+        }
+
     }
 }
